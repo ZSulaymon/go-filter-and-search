@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestIndex(t *testing.T) {
 	tests := []struct {
@@ -52,7 +54,7 @@ func TestAny(t *testing.T) {
 		want      bool
 	}{
 		{"Any true", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			return i==9
+			return i == 9
 		}, true},
 		{"Any false", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
 			return i == 10
@@ -89,22 +91,34 @@ func TestNone(t *testing.T) {
 }
 
 func TestFind(t *testing.T) {
-	tests := []struct {
-		name      string
-		items     []int
-		predicate func(int) bool
-		want      int
-	}{
-		{"Find result", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			return i == 9
-		}, 9},
+
+	if Find([]int{1, 2, 3, 4, 5}, func(i int) bool {
+		return i == 2
+	}) != 2 {
+		t.Error("...")
 	}
-	// panic if nothing was found
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := Find(tt.items, tt.predicate); got != tt.want {
-				t.Errorf("Test for %v Find() = %v, want %v", tt.name, got, tt.want)
+
+	func() {
+		defer func() {
+			err := recover()
+			if err == nil {
+				t.Error("Want panic!")
 			}
+		}()
+		Find([]int{1, 2, 3}, func(i int) bool {
+			return i == 6
 		})
-	}
+	}()
+
+	func() {
+		defer func() {
+			err := recover()
+			if err == nil {
+				t.Error("Want panic!")
+			}
+		}()
+		Find([]int{1, 2, 3}, func(i int) bool {
+			return i == -1
+		})
+	}()
 }
