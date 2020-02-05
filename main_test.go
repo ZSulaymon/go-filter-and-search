@@ -10,16 +10,10 @@ func TestIndex(t *testing.T) {
 		want      int
 	}{
 		{"Index exist", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 9 {
-				return true
-			}
-			return false
+			return i == 9
 		}, 8},
 		{"Index does not exist", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 10 {
-				return true
-			}
-			return false
+			return i == 10
 		}, -1},
 	}
 	for _, tt := range tests {
@@ -37,16 +31,10 @@ func TestAll(t *testing.T) {
 		want      bool
 	}{
 		{"All true", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 9 {
-				return true
-			}
-			return false
+			return i == 9
 		}, false},
 		{"All false", []int{2, 2, 2, 2, 2, 2, 2, 2, 2}, func(i int) bool {
-			if i == 2 {
-				return true
-			}
-			return false
+			return i == 2
 		}, true},
 	}
 	for _, tt := range tests {
@@ -64,16 +52,10 @@ func TestAny(t *testing.T) {
 		want      bool
 	}{
 		{"Any true", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 9 {
-				return true
-			}
-			return false
+			return i==9
 		}, true},
 		{"Any false", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 10 {
-				return true
-			}
-			return false
+			return i == 10
 		}, false},
 	}
 	for _, tt := range tests {
@@ -87,22 +69,16 @@ func TestAny(t *testing.T) {
 
 func TestNone(t *testing.T) {
 	tests := []struct {
-		name string
+		name      string
 		items     []int
 		predicate func(int) bool
-		want bool
+		want      bool
 	}{
 		{"None false", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 9 {
-				return true
-			}
-			return false
+			return i == 9
 		}, false},
 		{"None true", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 10 {
-				return true
-			}
-			return false
+			return i == 10
 		}, true},
 	}
 	for _, tt := range tests {
@@ -114,16 +90,13 @@ func TestNone(t *testing.T) {
 
 func TestFind(t *testing.T) {
 	tests := []struct {
-		name string
+		name      string
 		items     []int
 		predicate func(int) bool
-		want int
+		want      int
 	}{
 		{"Find result", []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, func(i int) bool {
-			if i == 9 {
-				return true
-			}
-			return false
+			return i == 9
 		}, 9},
 	}
 	for _, tt := range tests {
