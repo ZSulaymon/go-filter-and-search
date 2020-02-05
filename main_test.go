@@ -99,6 +99,7 @@ func TestFind(t *testing.T) {
 			return i == 9
 		}, 9},
 	}
+	// panic if nothing was found
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Find(tt.items, tt.predicate); got != tt.want {
